@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { View, Text } from 'react-native';
+import { AsyncStorage, View, Text } from 'react-native';
 import { Button } from 'react-native-elements';
 import Overlay from 'react-native-modal-overlay';
 import { Container, Header, Content, Form, Item, Input, Label } from 'native-base';
@@ -17,17 +17,41 @@ export default class TasksPage extends React.Component {
             addTaskPageOpen: false,
             finishedTaskPageOpen: false,
             tasks: [
-                {taskName: 'First Task', importance: 0, active: false, finished: false},
-                {taskName: 'Seconde Task', importance: 0, active: false, finished: false},
-                {taskName: 'Third Task', importance: 0, active: false, finished: false},
             ],
             newTaskImportance: 0,
             newTaskName: '',
         }
     }
 
+    componentDidMount() {
+        console.log('componentDidMount')
+        AsyncStorage.getItem("state").then((value)=> {
+            console.log('get ',value)
+            console.log(JSON.parse(value))
+            this.setState(JSON.parse(value));
+        });
+    }
+
     componentWillUpdate(nextProps, nextState) {
         // console.log(nextState);
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if(this.state !== prevState) {
+            console.log('add',JSON.stringify(this.state))
+            AsyncStorage.setItem("state", JSON.stringify(this.state));
+        }
+    }
+
+    removeTask = (state, i) => {
+        console.log(i)
+        const arr = [
+            ...this.state.tasks.slice(0, i),
+            ...this.state.tasks.slice(i+1)
+        ]
+        this.setState({
+            tasks: arr
+        })
     }
 
     toggleAddTaskPage = () => {
@@ -97,6 +121,7 @@ export default class TasksPage extends React.Component {
         return(
             <View style={styles.container}>
                 <List 
+                    removeTask={this.removeTask}
                     lastActiveIndex = {this.state.lastActiveIndex}
                     finishedTaskPage={this.finishedTaskPage}
                     toggleFinishedTaskPage={this.toggleFinishedTaskPage}
