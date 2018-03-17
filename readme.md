@@ -3,10 +3,9 @@
 hello and welcome to my first app! 
 
 # How to use
-## Table of Contents
-1) you need to make sure that the developer option on your phone is working, and installing apps with USB is allowed.
+1. you need to make sure that the developer option on your phone is working, and installing apps with USB is allowed.
 
-2) run those commands in your terminal: 
+2. run those commands in your terminal: 
 ```
  npm install 
  react-native run-android
