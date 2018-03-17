@@ -1,6 +1,8 @@
 
 
-#How to use
+hello and welcome to my first app! 
+
+# #How to use
  
 1) you need to make sure that the developer option on your phone is working, and installing apps with USB is allowed.
 
