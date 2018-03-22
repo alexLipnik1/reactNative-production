@@ -14,6 +14,8 @@ export default class TasksPage extends React.Component {
     constructor(){
         super();
         this.state = {
+            taskIndex: 0,            
+            removeTaskPageOpen: false,
             addTaskPageOpen: false,
             finishedTaskPageOpen: false,
             tasks: [
@@ -43,14 +45,23 @@ export default class TasksPage extends React.Component {
         }
     }
 
-    removeTask = (state, i) => {
+    changeTaskIndex = (i) => {
+        console.log('change', i)
+        this.setState({
+            ...this.state,
+            taskIndex: i 
+        })
+    }
+
+    removeTask = (i) => {
         console.log(i)
         const arr = [
             ...this.state.tasks.slice(0, i),
             ...this.state.tasks.slice(i+1)
         ]
         this.setState({
-            tasks: arr
+            tasks: arr,
+            removeTaskPageOpen: !this.state.removeTaskPageOpen,
         })
     }
 

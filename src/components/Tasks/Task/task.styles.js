@@ -60,6 +60,24 @@ export default styles = StyleSheet.create({
         padding: 15,
         fontWeight: 'bold',
     },
+    importance_1:{
+        borderRadius: 50,        
+        height: 35,
+        width: 35,
+        backgroundColor: '#75a3a3',
+    },
+    importance_2:{
+        borderRadius: 50,        
+        height: 35,
+        width: 35,
+        backgroundColor: '#F0E68C',
+    },
+    importance_3:{
+        borderRadius: 50,        
+        height: 35,
+        width: 35,
+        backgroundColor: '#ff4d4d',
+    },
 
     
     notification: {
@@ -78,7 +96,7 @@ export default styles = StyleSheet.create({
         borderBottomWidth: 1.5, 
         borderRightWidth: 0.5, 
         borderColor: '#cccccc', 
-        width: 200,
+        width: 280,
         margin: 10,
         height: 66,
         justifyContent: 'center',
