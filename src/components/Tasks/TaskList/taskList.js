@@ -13,6 +13,7 @@ import styles from './taskList.style';
 export default _List = (props) => {
     const {
         changeTaskIndex,
+        _changeTaskIndex,
         taskIndex,
         Tasks,
         lastActiveIndex,
@@ -25,28 +26,23 @@ export default _List = (props) => {
         finishedTaskOverlay
     } = props; 
 
-    const handleRemove = (state, i) => {
-        changeTaskIndex(i);
-        toggleRemoveTaskPage();
-    }
-
     return (
     <ScrollView  >
         <Overlay visible={finishedTaskOverlay}
-            closeOnTouchOutside animationType="zoomIn"
+            animationType="zoomIn"
             animationDuration={500} >
             <FinishedTaskPage toggleFinishedTaskPage={() => toggleFinishedTaskPage()}/>
         </Overlay>
         <Overlay visible={removeTaskPage}
-            closeOnTouchOutside animationType="zoomIn"
+            animationType="zoomIn"
             animationDuration={500} >
-            <RemoveTaskPage taskIndex={taskIndex} removeTask={removeTask} toggleRemoveTaskPage={() => toggleRemoveTaskPage()}/>
+            <RemoveTaskPage taskIndex={taskIndex} removeTask={removeTask} toggleRemoveTaskPage={() =>{ toggleRemoveTaskPage(), console.log(taskIndex, 'list')}}/>
         </Overlay>
         <List >{
             Tasks.map((l, i) => (
                 <GestureRecognizer 
                     key={i}            
-                    onSwipeLeft={(state)=> handleRemove(state, i)}
+                    onSwipeLeft={(state)=> {changeTaskIndex(state, i)}}//handleRemove(state, i)}
                 >
                     <Task
                         key={i}
